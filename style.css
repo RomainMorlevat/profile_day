@@ -26,6 +26,17 @@ body {
   border-radius: 50%;
 }
 
+.card {
+  display: flex;
+  align-items: center;
+  margin: 20px 0 0 40px;
+}
+
+.user_link {
+  flex: 1 1 auto;
+  padding: 20px;
+}
+
 h1 {
   color:hsl(0, 0%, 40%);
   background:#eee;
