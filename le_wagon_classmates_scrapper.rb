@@ -1,7 +1,10 @@
 require 'open-uri'
 require 'nokogiri'
 
+# This code is ugly, feel free to give me tips do do better.
+# https://github.com/RomainMorlevat/
 # ctrl + s on http://kitt.lewagon.org/camps/30/classmates
+# because kitt requires login and because of that nokogiri don't get the content
 
 url = "Kitt - Le Wagon.htm"
 html_doc = Nokogiri::HTML(open(url))
@@ -25,12 +28,13 @@ html_doc.search('.valign-middle').each do |el|
   username = el.search('a').first.text.strip unless el.search('a').first.text.strip == ""
   pic = get_picture(el)
   if name && username
-    name_link_array << " alt=\"#{name}\">\n<div class=\"user_link\">\n<a href=\"https://#{username}.github.io/profile\">#{name}</a>\n</div>\n</div>\n"
+    name_link_array << " alt=\"#{name}\">\n<div class=\"user_link\">\n
+                         <a href=\"https://#{username}.github.io/profile\">#{name}</a>\n</div>\n</div>\n"
   end
   img_array << "<div class=\"card\">\n<img src=\"images/#{pic}\"" unless pic.empty?
 end
 
-#
+# Build the final html block. You need to copy/paste the result in the right place in the index.html
 name_link_array.each_with_index do |el, index|
   li = img_array[index] + el
   file.write(li)
